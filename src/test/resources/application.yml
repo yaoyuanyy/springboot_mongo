@@ -1,0 +1,11 @@
+#mongodb
+spring:
+  data:
+    mongodb:
+      uri: mongodb://user:gome@10.69.13.200:27017/mei_test
+
+logging:
+  level:
+#    org.springframework.boot: debug #org.springframework.boot配置debug级别可以打印出autoConfig的信息
+    org.springframework.boot: info
+  .*: error
