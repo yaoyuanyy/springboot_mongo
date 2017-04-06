@@ -1,1 +1,5 @@
 a spring boot mongodb example
+
+springboot:1.4.5
+mongodb:3.2.12
+mongodb-java:3.2.2
