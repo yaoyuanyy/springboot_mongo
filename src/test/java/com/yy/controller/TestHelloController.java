@@ -40,6 +40,7 @@ public class TestHelloController {
     private String save_Url = APP_URL + "save";
     private String get_Url = APP_URL + "get";
     private String list_Url = APP_URL + "list";
+    private String update_Url = APP_URL + "update";
 
 
     private MockMvc mockMvc;
@@ -65,6 +66,21 @@ public class TestHelloController {
         System.out.println(response.getBody());
     }
 
+    @Test
+    public void update() throws Exception {
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get(base.toString() + update_Url)
+                .param("id", "AAAsdfdsfds_wrf@gdg232D");
+
+        ResultActions resultActions = getMockMvc().perform(requestBuilder)
+                .andExpect(MockMvcResultMatchers.handler().handlerType(HelloController.class))
+                .andExpect(MockMvcResultMatchers.handler().methodName("update"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+        String result = resultActions.andReturn().getResponse().getContentAsString();
+        System.out.println(result);
+        Assert.assertNotNull("not null", result);
+    }
+
     /**
      * return Person{id='58e45f88e931b922507900c0', name='aa', age=10, ctime=Wed Apr 05 11:07:52 CST 2017}
      * @throws Exception
@@ -78,7 +94,6 @@ public class TestHelloController {
                 .andExpect(MockMvcResultMatchers.handler().handlerType(HelloController.class))
                 .andExpect(MockMvcResultMatchers.handler().methodName("getById"))
                 .andExpect(MockMvcResultMatchers.status().isOk());
-
 
         String result = resultActions.andReturn().getResponse().getContentAsString();
         System.out.println(result);

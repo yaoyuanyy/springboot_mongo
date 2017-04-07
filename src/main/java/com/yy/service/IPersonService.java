@@ -13,4 +13,6 @@ public interface IPersonService {
     Person getById(String id) throws Exception;
 
     List<Person> list(String name) throws Exception;
+
+    void update(Person p) throws Exception;
 }

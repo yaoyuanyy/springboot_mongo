@@ -2,6 +2,7 @@ package com.yy.controller;
 
 import com.yy.model.Person;
 import com.yy.service.IPersonService;
+import com.yy.service.PersonRepository;
 import com.yy.util.MongoUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +25,9 @@ public class HelloController {
     @Resource
     IPersonService personService;
 
+    @Resource
+    PersonRepository personRepository;
+
 
     @RequestMapping("/home")
     public String home() {
@@ -34,8 +38,6 @@ public class HelloController {
     public String save() throws Exception {
         Person person = new Person();
         String id = MongoUtil.getNewObjectId();
-        //String id = "ssssssAsssAAsdfdsfds_wrf@gdg232D2";
-        System.out.println("id:"+id);
         person.setId(id);
         person.setName("aa");
         person.setAge(10);
@@ -44,6 +46,18 @@ public class HelloController {
         personService.save(person);
 
         return "success";
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    public String update(String id) throws Exception {
+        Person person = new Person();
+        person.setId(id);
+        person.setAge(11);
+        person.setCtime(LocalDateTime.now());
+
+        personService.update(person);
+
+        return "update success";
     }
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
@@ -56,7 +70,9 @@ public class HelloController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public List<Person> list(String name) throws Exception {
-        List<Person> ps = personService.list(name);
+        List<Person> ps = personRepository.findByNameIs(name);
+
+        //List<Person> ps = personService.list(name);
         ps.forEach(p -> System.out.println(p));
         return ps;
     }

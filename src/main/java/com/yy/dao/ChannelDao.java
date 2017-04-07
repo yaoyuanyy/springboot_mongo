@@ -1,7 +1,7 @@
 package com.yy.dao;
 
 import com.mongodb.DBObject;
-import com.yy.model.Person;
+import com.yy.model.Channel;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.BasicQuery;
@@ -18,38 +18,42 @@ import java.util.List;
  */
 
 @Repository
-public class PersonDao {
+public class ChannelDao {
     @Resource
     MongoTemplate mongoTemplate;
 
-    public void save(Person p) throws Exception{
+    public void save(Channel channel) throws Exception{
 
-        mongoTemplate.save(p);
+        mongoTemplate.save(channel);
     }
 
-    public Person getById(String id) throws Exception {
-        return mongoTemplate.findById(id, Person.class);
+    public Channel getById(String id) throws Exception {
+        return mongoTemplate.findById(id, Channel.class);
     }
 
-    public List<Person> list(DBObject dbObject) throws Exception {
+    public List<Channel> list(DBObject dbObject) throws Exception {
        return list(dbObject, null);
     }
 
-    public List<Person> list(DBObject dbObject, Sort sort) throws Exception {
+    public List<Channel> list(DBObject dbObject, Sort sort) throws Exception {
         BasicQuery query = new BasicQuery(dbObject);
         if(!ObjectUtils.isEmpty(sort)) {
             query.with(sort);
         }
 
-        List<Person> pss = mongoTemplate.find(query, Person.class);
+        List<Channel> pss = mongoTemplate.find(query, Channel.class);
         return pss;
     }
 
-    public List<Person> list(Query query) throws Exception {
-        return mongoTemplate.find(query, Person.class);
+    public List<Channel> list(Query query) throws Exception {
+        return mongoTemplate.find(query, Channel.class);
     }
 
     public void update(Query query, Update update) throws Exception{
-        mongoTemplate.updateFirst(query, update, Person.class);
+        mongoTemplate.updateFirst(query, update, Channel.class);
+    }
+
+    public List<Channel> find(Query query) {
+        return mongoTemplate.find(query, Channel.class);
     }
 }
