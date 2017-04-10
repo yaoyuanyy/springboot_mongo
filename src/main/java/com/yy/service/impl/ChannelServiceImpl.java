@@ -14,10 +14,13 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
+ * 方式一：一般式
+ * 这种方式为一般式的service调用dao的逻辑，spring data mongodb提供了另种简便的方式：
+ * 根据属性自动生成对应方法，详解{@link com.yy.service.IChannelService2}
  * Created by skyler on 2017/4/6.
  */
 @Service
-public class ChannelServiceImpl implements IChannelService {
+public class ChannelServiceImpl implements IChannelService{
 
     @Resource
     ChannelDao channelDao;

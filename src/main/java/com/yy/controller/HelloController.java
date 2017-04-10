@@ -4,6 +4,8 @@ import com.yy.model.Person;
 import com.yy.service.IPersonService;
 import com.yy.service.PersonRepository;
 import com.yy.util.MongoUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +23,8 @@ import java.util.List;
 @RequestMapping("/hello")
 //@EnableAutoConfiguration
 public class HelloController {
+
+    private static final Logger log = LoggerFactory.getLogger(HelloController.class);
 
     @Resource
     IPersonService personService;
@@ -42,7 +46,7 @@ public class HelloController {
         person.setName("aa");
         person.setAge(10);
         person.setCtime(LocalDateTime.now());
-
+        log.info("-----------"+person.toString());
         personService.save(person);
 
         return "success";

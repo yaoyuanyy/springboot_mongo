@@ -11,3 +11,4 @@ logging:
 #    org.springframework.boot: debug #org.springframework.boot配置debug级别可以打印出autoConfig的信息
     org.springframework.boot: info
   .*: error
+  path: log #当前项目路径下自动创建log文件夹，在logback.xml中配置日志文件的路径。如:<FileNamePattern>${LOG_PATH}/meipro.%d{yyyy-MM-dd}.log</FileNamePattern>

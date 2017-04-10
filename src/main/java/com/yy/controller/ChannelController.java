@@ -3,6 +3,7 @@ package com.yy.controller;
 import com.yy.model.Channel;
 import com.yy.model.MsgConf;
 import com.yy.service.IChannelService;
+import com.yy.service.IChannelService2;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +23,9 @@ public class ChannelController {
     @Resource
     private IChannelService channelService;
 
+    @Resource
+    private IChannelService2 channelService2;
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public void save(@RequestBody Channel channel) throws Exception {
         long time = new Date().getTime();
@@ -40,5 +44,11 @@ public class ChannelController {
     @RequestMapping(value = "/getByCompanyId", method = RequestMethod.GET)
     public List<Channel> getByCompanyId(long companyId) throws Exception {
         return channelService.getByCompanyId(companyId);
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    public String update(String id,String name){
+
+        return "update success";
     }
 }
